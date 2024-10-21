@@ -1,5 +1,4 @@
 import Expense from "../models/expenseModel.js";
-import User from "../models/userModel.js";
 
 export const addExpense = async (req, res) => {
     try {
@@ -28,6 +27,11 @@ export const addExpense = async (req, res) => {
             if (totalPercentage !== 100) {
                 return res.status(400).json({ message: "Percentages do not add up to 100%" });
             }
+            // Calculate exact amounts based on percentages and total amount
+            expenseData.exactAmounts = percentages.map(entry => ({
+                userId: entry.userId,
+                amount: (entry.percentage / 100) * amount,
+            }));
             expenseData.percentages = percentages; // Store percentages
         } else if (splitMethod === 'equal') {
             // Calculate the equal share for each participant
@@ -48,6 +52,7 @@ export const addExpense = async (req, res) => {
         return res.status(500).json({ message: "Error adding expense" });
     }
 };
+
 
 export const getUserExpenses = async (req, res) => {
     try {

@@ -18,17 +18,22 @@
 // unequal but exact split
 
 {
-    "description": "Lunch with friends",
-    "amount": 3000,
+    "description": "Movie Night",
+    "amount": 2000,
     "participants": [
         "67164bacc6bd570afb25eceb",
-        "67165e104c60b2dd0eaf2dc3",
+        "67165e104c60b2dd0eaf2dc8",
         "67168e87771c433b8f658740"
     ],
-    "splitMethod": "equal",
-    "exactAmounts": [],
+    "splitMethod": "exact",
+    "exactAmounts": [
+        { "userId": "67164bacc6bd570afb25eceb", "amount": 500 },
+        { "userId": "67165e104c60b2dd0eaf2dc8", "amount": 700 },
+        { "userId": "67168e87771c433b8f658740", "amount": 800 }
+    ],
     "percentages": []
 }
+
 
 
 //percentage split
