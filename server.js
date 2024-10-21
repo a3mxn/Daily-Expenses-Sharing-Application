@@ -2,14 +2,16 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectMongo from './db/connectmongo.js';
 import userRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 const app = express();
+connectMongo();
 
+app.use(cookieParser());
 app.use(express.json());
 
-connectMongo();
 
 app.use('/api/users', userRoutes);
 

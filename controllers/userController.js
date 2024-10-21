@@ -89,3 +89,20 @@ export const loginUser = async (req, res) => {
         return res.status(500).json({ message: "Error in logging in" });
     }
 }
+
+export const getUserProfile = async (req, res) => {
+    try {
+        const userId = req.userId; // This comes from the auth middleware
+
+        const user = await User.findById(userId).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ user });
+    } catch (error) {
+        console.log("Error fetching user profile", error.message);
+        return res.status(500).json({ message: "Error fetching user profile" });
+    }
+};
