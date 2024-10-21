@@ -4,9 +4,9 @@ import { generateTokenAndSetCookie } from "../webtoken/generateToken.js";
 
 export const createUser = async(req,res) =>{
     try {
-        const {username,email,password} = req.body;
+        const {username,email,password,mobile} = req.body;
 
-        if(!username || !email || !password){
+        if(!username || !email || !password || !mobile){
             return res.status(401).json({message:"Not all fields are filled"});
         }
     
@@ -25,8 +25,10 @@ export const createUser = async(req,res) =>{
             return res.status(400).json({ message: "Email already taken" });
         }
 
-
-
+        const existingUserByMobile = await User.findOne({ mobile });
+        if (existingUserByEmail) {
+            return res.status(400).json({ message: "Mobile already taken" });
+        }
 
         const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
@@ -35,6 +37,7 @@ export const createUser = async(req,res) =>{
 			username,
 			email,
 			password: hashedPassword,
+            mobile,
 		});
 
         await newUser.save();
@@ -46,5 +49,43 @@ export const createUser = async(req,res) =>{
     } catch (error) {
 		console.log("Error in signup controller", error.message);
         return res.status(401).json({message:"Error in creating new user"})
+    }
+}
+export const loginUser = async (req, res) => {
+    try {
+        const { loginIdentifier, password } = req.body; // Renamed for clarity
+
+        if (!loginIdentifier || !password) {
+            return res.status(401).json({ message: "Not all fields are filled" });
+        }
+
+        // Check if the user exists using username, email, or mobile
+        const existingUser = await User.findOne({
+            $or: [
+                { username: loginIdentifier },
+                { email: loginIdentifier },
+                { mobile: loginIdentifier }
+            ]
+        });
+
+        if (!existingUser) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        // Compare the provided password with the stored hashed password
+        const isMatch = await bcrypt.compare(password, existingUser.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
+        }
+
+        // Generate token and set it in a cookie
+        generateTokenAndSetCookie(existingUser._id, res);
+
+        // Respond with success message and user data (optional)
+        res.status(200).json({ message: "Login successful", user: { username: existingUser.username, email: existingUser.email } });
+
+    } catch (error) {
+        console.log("Error in login controller", error.message);
+        return res.status(500).json({ message: "Error in logging in" });
     }
 }
