@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import connectMongo from './db/connectmongo.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import expenseRoutes from './routes/expenseRoutes.js'
+import cors from 'cors';
 
 dotenv.config();
 
@@ -11,9 +13,13 @@ connectMongo();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+    origin: '*', // or specify your frontend URL
+}));
 
 
 app.use('/api/users', userRoutes);
+app.use('/api/expense',expenseRoutes);
 
 const PORT = process.env.PORT || 5000;
 

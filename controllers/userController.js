@@ -107,3 +107,13 @@ export const getUserProfile = async (req, res) => {
         return res.status(500).json({ message: "Error fetching user profile" });
     }
 };
+
+export const fetchFriends = async (req, res) => {
+    try {
+        const users = await User.find({}, { _id: 1, username: 1, email: 1 });
+        return res.status(200).json({ users });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(500).json({ message: "Error fetching users" });
+    }
+};

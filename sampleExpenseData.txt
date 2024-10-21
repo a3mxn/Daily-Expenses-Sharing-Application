@@ -1,0 +1,51 @@
+//equal split
+
+{
+    "description": "Lunch with friends",
+    "amount": 3000,
+    "participants": [
+        "67164bacc6bd570afb25eceb",
+        "67165e104c60b2dd0eaf2dc3",
+        "67168e87771c433b8f658740"
+    ],
+    "splitMethod": "equal",
+    "exactAmounts": [],
+    "percentages": []
+}
+
+
+
+// unequal but exact split
+
+{
+    "description": "Lunch with friends",
+    "amount": 3000,
+    "participants": [
+        "67164bacc6bd570afb25eceb",
+        "67165e104c60b2dd0eaf2dc3",
+        "67168e87771c433b8f658740"
+    ],
+    "splitMethod": "equal",
+    "exactAmounts": [],
+    "percentages": []
+}
+
+
+//percentage split
+
+{
+    "description": "Dinner Celebration",
+    "amount": 4500,
+    "participants": [
+        "67164bacc6bd570afb25eceb",
+        "67165e104c60b2dd0eaf2dc3",
+        "67168e87771c433b8f658740"
+    ],
+    "splitMethod": "percentage",
+    "exactAmounts": [],
+    "percentages": [
+        { "userId": "67164bacc6bd570afb25eceb", "percentage": 20 },
+        { "userId": "67165e104c60b2dd0eaf2dc3", "percentage": 30 },
+        { "userId": "67168e87771c433b8f658740", "percentage": 50 }
+    ]
+}
