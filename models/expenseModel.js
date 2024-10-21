@@ -14,6 +14,10 @@ const expenseSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    participants: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User" 
+    }],
     splitMethod: {
         type: String,
         enum: ["equal", "exact", "percentage"],
@@ -54,6 +58,7 @@ const expenseSchema = new mongoose.Schema({
         },
     ],
 }, { timestamps: true });
+
 
 const Expense = mongoose.model("Expense", expenseSchema);
 
