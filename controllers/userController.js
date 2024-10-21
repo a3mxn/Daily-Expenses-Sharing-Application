@@ -43,7 +43,7 @@ export const createUser = async(req,res) =>{
         await newUser.save();
 
         generateTokenAndSetCookie(newUser._id, res);
-
+        console.log(`User created successfully. username = ${newUser.username}`);
         res.status(201).json({ message: "User created successfully", newUser});
     
     } catch (error) {
@@ -82,6 +82,7 @@ export const loginUser = async (req, res) => {
         generateTokenAndSetCookie(existingUser._id, res);
 
         // Respond with success message and user data (optional)
+        console.log(`User logged in successfully. username = ${existingUser.username}`);
         res.status(200).json({ message: "Login successful", user: { username: existingUser.username, email: existingUser.email } });
 
     } catch (error) {
@@ -99,7 +100,7 @@ export const getUserProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-
+        console.log(`got current user username = ${user.username}`);
         res.status(200).json({ user });
     } catch (error) {
         console.log("Error fetching user profile", error.message);
