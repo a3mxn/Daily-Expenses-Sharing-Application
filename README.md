@@ -45,10 +45,10 @@ A backend application built with Node.js, Express, and MongoDB that allows users
 
 | Field          | Type                                                                 | Required |
 |----------------|----------------------------------------------------------------------|----------|
-| userId         | mongoose.Schema.Types.ObjectId (ref: 'User  ')                        | Yes      |
+| userId         | mongoose ObjectId (ref: 'User  ')                        | Yes      |
 | description    | String                                                              | Yes      |
 | amount         | Number                                                              | Yes      |
-| participants    | Array of mongoose.Schema.Types.ObjectId (ref: 'User  ')              | No       |
+| participants    | Array of mongoose ObjectId (ref: 'User  ')              | No       |
 | splitMethod    | String (enum: ['equal', 'exact', 'percentage'])                    | Yes      |
 | exactAmounts   | Array of objects (userId: ObjectId, amount: Number)                | No       |
 | percentages     | Array of objects (userId: ObjectId, percentage: Number)            | No       |
