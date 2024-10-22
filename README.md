@@ -6,12 +6,12 @@ A backend application built with Node.js, Express, and MongoDB that allows users
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/Daily-Expenses-Sharing.git
+   git clone https://github.com/a3mxn/Daily-Expenses-Sharing-Application.git
    ```
 
 2. Navigate to the project directory:
    ```
-   cd Daily-Expenses-Sharing-app
+   cd Daily-Expenses-Sharing-Application
    ```
 
 3. Install dependencies:
