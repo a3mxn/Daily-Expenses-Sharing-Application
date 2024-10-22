@@ -23,6 +23,7 @@ A backend application built with Node.js, Express, and MongoDB that allows users
    ```
    MONGO_URI=your-mongodb-connection-string
    JWT_SECRET=your-jwt-secret
+   PORT=your-port-number
    ```
 
 5. Start the server:
